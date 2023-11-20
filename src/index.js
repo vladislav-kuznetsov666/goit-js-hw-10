@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const error = document.querySelector('.error');
   const catInfo = document.querySelector('.cat-info');
 
+  loader.style.display = 'none';
+  error.style.display = 'none';
+
   // Завантаження списку порід при старті
   fetchBreeds()
     .then(breeds => {
@@ -39,20 +42,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const catImage = document.createElement('img');
         catImage.src = catData[0].url; 
+        
 
         const catName = document.createElement('h2');
         catName.textContent = catData[0].breeds[0].name;
+        
 
         const catDescription = document.createElement('p');
         catDescription.textContent = catData[0].breeds[0].description;
+        
 
-        const catTemperament = document.createElement('h3');
+        const catTemperament = document.createElement('p');
         catTemperament.textContent = catData[0].breeds[0].temperament;
+       
 
-        // Очистка попереднього вмісту
+        
         catInfo.innerHTML = '';
-
-        // Додавання нового вмісту
+        
+        catInfo.classList.add('flex-container')
         catInfo.appendChild(catImage);
         catInfo.appendChild(catName);
         catInfo.appendChild(catDescription);
@@ -61,7 +68,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Приховання завантажувача після завершення запиту
         loader.style.display = 'none';
         // Відображення інформації про кота
-        catInfo.style.display = 'block';
+        catInfo.style.display = 'flex';
+        catInfo.style.flexDirection = 'column';
+        catInfo.style.alignitems = 'center';
       })
       .catch(() => {
         // Відобразити повідомлення про помилку
